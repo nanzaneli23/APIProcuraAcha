@@ -34,7 +34,7 @@ export default function Busca() {
                 <TextInput
                     style={css.search}
                     placeholder="Buscar animais"
-                    placeholderTextColor="white"
+                    placeholderTextColor="black"
                     TextInput={busca}
                     onChangeText={(digitado) => setBusca( digitado ) }
                 />
@@ -52,7 +52,7 @@ const css = StyleSheet.create({
         backgroundColor: "sandybrown",
     },
     text: {
-        color: "white"
+        color: "black"
     },
     searchBox: {
         width: "100%",
@@ -64,9 +64,9 @@ const css = StyleSheet.create({
         width: "96%",
         height: 60,
         borderWidth: 1,
-        borderColor: "white",
+        borderColor: "black",
         borderRadius: 8,
         padding: 10,
-        color: "white"
+        color: "black"
     }
 })

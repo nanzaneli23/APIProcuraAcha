@@ -7,7 +7,7 @@ export default function Animal({ id, nomeAnimal, animalRaca, animalTipo, animalC
     return (
         <View style={css.container}>
             <View style={css.boxTitle}>
-                <View style={css.circleAvatar}></View>
+                
                 <Text style={css.title}>{nomeAnimal}</Text>
             </View>
             <View style={css.boxImage}>
@@ -33,6 +33,7 @@ const css = StyleSheet.create({
         shadowOpacity: 0.25,
         shadowRadius: 3.84,
         elevation: 5,
+        marginTop: 25
     },
     boxTitle: {
         width: "100%",
