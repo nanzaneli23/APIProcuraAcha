@@ -19,26 +19,26 @@ export default function Login() {
             <Image source={require("../../assets/logo.png")} style={css.logo} />
             <TextInput
                 inputMode="email"
-                placeholder="Email"
+                placeholder="Email do Usuário"
                 style={css.input}
                 value={email}
                 onChangeText={(digitado) => setEmail(digitado)}
-                placeholderTextColor="white"
+                placeholderTextColor="black"
             />
             <TextInput
                 inputMode="text"
-                placeholder="Password"
+                placeholder="Senha"
                 secureTextEntry={true}
                 style={css.input}
                 value={senha}
                 onChangeText={(digitado) => setSenha(digitado)}
-                placeholderTextColor="white"
+                placeholderTextColor="black"
             />
             <View style={css.forgot}>
                 <Text style={css.forgotText}>Esqueceu a senha?</Text>
             </View>
             <TouchableOpacity style={css.btnLogin} onPress={RealizaLogin}>
-                <Text style={css.btnLoginText}>Log In</Text>
+                <Text style={css.btnLoginText}>Entrar</Text>
             </TouchableOpacity>
             {error &&
                 <View style={css.error}>
@@ -55,7 +55,7 @@ const css = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         alignContent: "center",
-        backgroundColor: "#191919"
+        backgroundColor: "sandybrown"
     },
     logo: {
         width: "60%",
@@ -67,8 +67,9 @@ const css = StyleSheet.create({
         borderRadius: 10,
         marginBottom: 15,
         padding: 15,
-        backgroundColor: "#262626",
-        color: "white"
+        backgroundColor: "papayawhip",
+        color: "black",
+        borderWidth:1
     },
     forgot: {
         width: "90%",
@@ -77,7 +78,7 @@ const css = StyleSheet.create({
         alignItems: "flex-end",
     },
     forgotText: {
-        color: "#0195fd",
+        color: "black",
         fontWeight: "bold"
     },
     btnLogin: {
@@ -86,10 +87,10 @@ const css = StyleSheet.create({
         borderWidth: 1,
         borderRadius: 10,
         marginTop: 30,
-        backgroundColor: "#0195fd"
+        backgroundColor: "papayawhip"
     },
     btnLoginText: {
-        color: "white",
+        color: "black",
         lineHeight: 45,
         textAlign: "center",
         fontSize: 15,

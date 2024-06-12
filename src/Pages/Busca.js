@@ -2,30 +2,30 @@ import { View, Text, TextInput, StyleSheet, FlatList, ActivityIndicator } from '
 import React, { useEffect, useState } from 'react';
 
 export default function Busca() {
-    const [usuarios, setUsuarios ] = useState( [] );
+    const [animal, setAnimal ] = useState( [] );
     const [error, setError ] = useState(false);
     const [busca, setBusca] = useState(false);
     const [filtro, setFiltro ] = useState(false);
 
-    async function getUsuarios()
+    async function getAnimal()
     {
-        await fetch('https://fakestoreapi.com/users', {
+        await fetch('http://10.139.75.34:5251/api/Animal/GetAllAnimal', {
             method: 'GET',
             headers: {
               'content-type': 'application/json'
             }
           })
             .then( res => ( res.ok == true ) ? res.json() : false )
-            .then( json => setUsuarios( json ) )
+            .then( json => setAnimal( json ) )
             .catch( err => setError( true ) )
     }
 
     useEffect( () => {
-        getUsuarios();
+        getAnimal();
     }, [] );
 
     useEffect( () => {
-        setFiltro( usuarios.filter( (item) => item.name.firstname == busca )[0] );
+        setFiltro( animal.filter( (item) => item.nomeAnimal == busca )[0] );
     }, [busca] );
 
     return (
@@ -33,13 +33,13 @@ export default function Busca() {
             <View style={css.searchBox}>
                 <TextInput
                     style={css.search}
-                    placeholder="Buscar usuarios"
+                    placeholder="Buscar animais"
                     placeholderTextColor="white"
                     TextInput={busca}
                     onChangeText={(digitado) => setBusca( digitado ) }
                 />
             </View>
-            { filtro && <Text style={css.text}>{filtro.name.firstname} {filtro.name.lastname}</Text> }
+            { filtro && <Text style={css.text}>{filtro.nomeAnimal}</Text> }
             { ( !filtro && busca ) && <ActivityIndicator size="large" color="white" /> }
         </View>
     )
@@ -49,7 +49,7 @@ const css = StyleSheet.create({
         flexGrow: 1,
         width: "100%",
         alignItems: "center",
-        backgroundColor: "#191919",
+        backgroundColor: "sandybrown",
     },
     text: {
         color: "white"
