@@ -78,12 +78,12 @@ export default function Home() {
       </View>
     )
   }
-  const animalFiltrado = animal.filter(animal => animal.animalStatus === 1);
+  const animalFiltrado = animal.filter(animal => animal.animalStatus === 0);
   return (
     <View style={css.container}>
       {animal.length > 0 && !detalhes &&
         <>
-         <Text style={css.textos}>Animais Desaparecidos</Text>
+         <Text style={css.textos}>Animais Encontrados</Text>
           <FlatList style={css.flatlist}
             data={animalFiltrado}
             renderItem={renderAnimais}

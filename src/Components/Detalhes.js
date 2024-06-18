@@ -48,7 +48,7 @@ export default function Detalhes({ handle, item, animal, animalFoto }) {
       <Text style={css.campo}>{item.animalCor}</Text>
       <Text style={css.campo}>{item.animalSexo}</Text>
       <Text style={css.campo}>{item.animalObservacao}</Text>
-      <Text style={css.campo}>{item.animalDtDesaparecimento}</Text>
+      <Text style={css.campo}>{item.animalDtDesaperecimento}</Text>
       <Text style={css.campo}>{item.animalDtEncontro}</Text>
       <Text style={css.campo}>{item.animalStatus}</Text>
 

@@ -1,16 +1,36 @@
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView, Image } from 'react-native'
 import React, { useContext, useState } from 'react'
 import { AuthContext } from '../Context/AuthContext';
-
+import Perfil from './Perfil'
 export default function Login() {
 
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
 
-    const { Login, error } = useContext(AuthContext);
+    const { Login, error} = useContext(AuthContext);
+
+    const [cadastro, setCadastro] = useState(false);
 
     function RealizaLogin() {
        Login( email, senha );
+    }
+
+    function Voltar()
+    {
+        setCadastro(false)
+    }
+
+    if(cadastro){
+        return(
+            <>
+                
+                <Perfil/>
+                <TouchableOpacity style={css.botaos} onPress={Voltar}>
+                <Text style={css.btnLoginText}>Voltar</Text>
+                </TouchableOpacity>
+
+            </>
+        )
     }
 
 
@@ -34,12 +54,15 @@ export default function Login() {
                 onChangeText={(digitado) => setSenha(digitado)}
                 placeholderTextColor="black"
             />
-            <View style={css.forgot}>
-                <Text style={css.forgotText}>Esqueceu a senha?</Text>
-            </View>
+           
+            <TouchableOpacity onPress={() => setCadastro(!cadastro)}>
+                <Text style={css.cadastroText}>Ainda não tem uma conta? Cadastre-se</Text>
+            </TouchableOpacity>
             <TouchableOpacity style={css.btnLogin} onPress={RealizaLogin}>
                 <Text style={css.btnLoginText}>Entrar</Text>
             </TouchableOpacity>
+
+
             {error &&
                 <View style={css.error}>
                     <Text style={css.errorText}>Revise os campos. Tente novamente!</Text>
@@ -89,12 +112,20 @@ const css = StyleSheet.create({
         marginTop: 30,
         backgroundColor: "papayawhip"
     },
+    botaos: {
+        width: "40%",
+        height: 50,
+        marginTop: -100
+      
+    },
+    
     btnLoginText: {
         color: "black",
         lineHeight: 45,
         textAlign: "center",
         fontSize: 15,
-        fontWeight: "bold"
+        fontWeight: "bold",
+        marginTop:5
     },
     error: {
         width: "100%",

@@ -1,18 +1,18 @@
-import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, Image, ScrollView } from 'react-native';
 import { useState } from 'react';
-import React from 'react'
+import React from 'react';
 
 export default function Inserir() {
-  const [usuarioNome, setUsuarioNome] = useState();
-  const [usuarioTelefone, setUsuarioTelefone] = useState();
-  const [usuarioEmail, setUsuarioEmail] = useState();
-  const [usuarioSenha, setUsuarioSenha] = useState();
+  const [usuarioNome, setUsuarioNome] = useState("");
+  const [usuarioTelefone, setUsuarioTelefone] = useState("");
+  const [usuarioEmail, setUsuarioEmail] = useState("");
+  const [usuarioSenha, setUsuarioSenha] = useState("");
 
   async function InsertUsuario() {
     await fetch('http://10.139.75.34:5251/api/Usuario/InsertUsuario', {
       method: 'POST',
       headers: {
-        'content-type': 'application/json; charset-UTF-8',
+        'Content-Type': 'application/json; charset-UTF-8',
       },
       body: JSON.stringify({
         usuarioTelefone: usuarioTelefone,
@@ -21,17 +21,23 @@ export default function Inserir() {
         usuarioSenha: usuarioSenha
       })
     })
-      .then((response) => response.json() )
-      .then( json => { setUsuarioTelefone(''), setUsuarioEmail(''), setUsuarioNome(''),  setUsuarioSenha('') })
+      .then((response) => response.json())
+      .then(json => { 
+        setUsuarioTelefone(''); 
+        setUsuarioEmail(''); 
+        setUsuarioNome('');  
+        setUsuarioSenha(''); 
+      })
       .catch(err => console.log(err));
   }
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>Faça já seu cadastro!!</Text>
+    <ScrollView contentContainerStyle={css.container}>
+      <Image source={require("../../assets/logo.png")} style={css.logo} />
       <TextInput
         inputMode="text"
         placeholder='Nome'
-        style={styles.input}
+        style={css.input}
         value={usuarioNome}
         onChangeText={(digitado) => setUsuarioNome(digitado)}
         placeholderTextColor='black'
@@ -39,15 +45,15 @@ export default function Inserir() {
       <TextInput
         inputMode="text"
         placeholder='Telefone'
-        style={styles.input}
+        style={css.input}
         value={usuarioTelefone}
         onChangeText={(digitado) => setUsuarioTelefone(digitado)}
         placeholderTextColor='black'
       />
       <TextInput
-        inputMode="text"
+        inputMode="email"
         placeholder='E-mail'
-        style={styles.input}
+        style={css.input}
         value={usuarioEmail}
         onChangeText={(digitado) => setUsuarioEmail(digitado)}
         placeholderTextColor='black'
@@ -55,59 +61,54 @@ export default function Inserir() {
       <TextInput
         inputMode="text"
         placeholder='Senha'
-        style={styles.input}
+        style={css.input}
         value={usuarioSenha}
         onChangeText={(digitado) => setUsuarioSenha(digitado)}
         placeholderTextColor='black'
       />
-      <TouchableOpacity style={styles.btn} onPress={() => InsertUsuario()}>
-        <Text style={styles.btnText}>Cadastrar</Text>
+      <TouchableOpacity style={css.btn} onPress={InsertUsuario}>
+        <Text style={css.btnText}>Cadastrar</Text>
       </TouchableOpacity>
-    </View>
-  )
+    </ScrollView>
+  );
 }
-const styles = StyleSheet.create({
+
+const css = StyleSheet.create({
   container: {
-    width: "100%",
-    backgroundColor: "sandybrown",
     flexGrow: 1,
-    color: "black",
+    width: "100%",
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
+    alignContent: "center",
+    backgroundColor: "sandybrown"
   },
-  text: {
-    fontSize:25,
-    textAlign:"center",
-    marginTop:15,
-    color:"black"
-   
-    
+  logo: {
+    width: "60%",
+    resizeMode: "contain"
   },
   input: {
     width: "90%",
-    height: 55,
-    borderWidth: 2,
-    borderColor: "black",
-    borderRadius: 5,
-    padding: 10,
+    height: 50,
+    borderRadius: 10,
+    marginBottom: 15,
+    padding: 15,
+    backgroundColor: "papayawhip",
     color: "black",
-    marginTop:10
-},
-btn: {
-  width: "90%",
+    borderWidth: 1
+  },
+  btn: {
+    width: "90%",
     height: 50,
     borderWidth: 1,
     borderRadius: 10,
-    marginTop: 10,
-    borderWidth: 0,
-    borderColor: "black",
+    marginTop: 30,
     backgroundColor: "papayawhip"
-},
-btnText: {
-  color: "black",
-  lineHeight: 45,
-  textAlign: "center",
-  fontSize: 15,
-  fontWeight: "bold"
-},
-})
+  },
+  btnText: {
+    color: "black",
+    lineHeight: 45,
+    textAlign: "center",
+    fontSize: 15,
+    fontWeight: "bold"
+  }
+});
